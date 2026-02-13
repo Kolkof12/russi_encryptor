@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RUSSI ENCODER - Level 100</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;}
+body{
+    min-height:100vh;
+    background: linear-gradient(135deg,#0f0f0f,#1a1a2e,#16213e);
+    display:flex; justify-content:center; align-items:center; color:white;
+}
+.container{
+    width:95%; max-width:950px;
+    background: rgba(0,0,0,0.3); backdrop-filter: blur(20px);
+    border-radius:25px; padding:30px;
+    box-shadow:0 0 50px rgba(0,255,255,0.3);
+    transition:0.4s;
+}
+.container:hover{ transform:translateY(-5px); box-shadow:0 0 80px rgba(0,255,255,0.6);}
+h1{text-align:center; color:#00f7ff; letter-spacing:2px; margin-bottom:25px;}
+textarea{
+    width:100%; height:160px; background:#111; border:none; border-radius:12px;
+    padding:15px; color:white; margin-bottom:15px; resize:none; outline:none;
+}
+button{
+    width:100%; padding:14px; border:none; border-radius:12px; background:#00f7ff;
+    color:black; font-weight:bold; cursor:pointer; transition:0.3s; margin-bottom:12px;
+}
+button:hover{ background:#00c3cc; transform:scale(1.04);}
+.links{text-align:center; margin-top:15px;}
+.links a{color:#00f7ff; text-decoration:none; margin:0 12px; transition:0.3s;}
+.links a:hover{color:white;}
+.footer{text-align:center; margin-top:20px; font-size:14px; opacity:0.7;}
+</style>
+</head>
+
+<body>
+<div class="container">
+<h1>RUSSI ENCODER 🔥</h1>
+
+<textarea id="inputCode" placeholder="Paste your Python code here..."></textarea>
+<button onclick="encodeCode()">Encrypt (Multi-Layer)</button>
+
+<textarea id="outputCode" placeholder="Encrypted code will appear here..."></textarea>
+<button onclick="copyCode()">Copy Encrypted Code</button>
+
+<div class="links">
+    <a href="https://instagram.com/thecryzruss" target="_blank">Instagram</a>
+    <a href="https://t.me/wxl_e" target="_blank">Telegram</a>
+    <a href="https://t.me/WXL_STORE" target="_blank">Channel</a>
+</div>
+
+<div class="footer">
+    © 2026 Russi Dev — All Rights Reserved
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
+<script>
+function encodeCode(){
+    let input = document.getElementById("inputCode").value;
+
+    // Base64
+    let base64Encoded = btoa(unescape(encodeURIComponent(input)));
+
+    // AES Encrypt
+    let aesKey = "RussiSecret123";
+    let aesEncrypted = CryptoJS.AES.encrypt(base64Encoded, aesKey).toString();
+
+    // Marshal/Zlib Layer (simulated with Base64 again for simplicity)
+    let finalEncoded = btoa(aesEncrypted);
+
+    let pythonStub = `import base64\nfrom Crypto.Cipher import AES\nkey=b"${aesKey}"\nencoded="${finalEncoded}"\ncipher=AES.new(key,AES.MODE_ECB)\ndecode_step1=cipher.decrypt(base64.b64decode(encoded))\ndecode_step2=base64.b64decode(decode_step1)\nexec(decode_step2.decode())`;
+
+    document.getElementById("outputCode").value = pythonStub;
+}
+
+function copyCode(){
+    let output = document.getElementById("outputCode");
+    output.select();
+    document.execCommand("copy");
+    alert("Copied Successfully!");
+}
+</script>
+
+</body>
+</html>
